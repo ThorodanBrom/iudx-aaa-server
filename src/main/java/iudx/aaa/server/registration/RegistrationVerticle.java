@@ -19,6 +19,7 @@ import io.vertx.pgclient.PgConnectOptions;
 import io.vertx.pgclient.PgPool;
 import io.vertx.serviceproxy.ServiceBinder;
 import io.vertx.sqlclient.PoolOptions;
+import iudx.aaa.server.apiserver.Schema;
 
 /**
  * The Registration Verticle.

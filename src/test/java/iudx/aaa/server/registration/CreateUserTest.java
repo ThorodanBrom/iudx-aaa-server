@@ -37,6 +37,7 @@ import io.vertx.sqlclient.PoolOptions;
 import io.vertx.sqlclient.Tuple;
 import iudx.aaa.server.apiserver.RegistrationRequest;
 import iudx.aaa.server.apiserver.Roles;
+import iudx.aaa.server.apiserver.Schema;
 import iudx.aaa.server.apiserver.User;
 import iudx.aaa.server.apiserver.User.UserBuilder;
 import iudx.aaa.server.configuration.Configuration;
@@ -106,6 +107,8 @@ public class CreateUserTest {
     databasePassword = dbConfig.getString("databasePassword");
     poolSize = Integer.parseInt(dbConfig.getString("poolSize"));
 
+    Schema.INSTANCE.setSchema("test");
+
     if (connectOptions == null) {
       connectOptions = new PgConnectOptions().setPort(databasePort).setHost(databaseIP)
           .setDatabase(databaseName).setUser(databaseUserName).setPassword(databasePassword);
@@ -116,6 +119,7 @@ public class CreateUserTest {
     }
 
     pool = PgPool.pool(vertx, connectOptions, poolOptions);
+
 
     /* create fake organization */
     orgIdFut =

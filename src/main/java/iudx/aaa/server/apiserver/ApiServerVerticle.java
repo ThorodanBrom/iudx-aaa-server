@@ -115,6 +115,8 @@ public class ApiServerVerticle extends AbstractVerticle {
     serverTimeout = Long.parseLong(config().getString(SERVER_TIMEOUT_MS));
     corsRegex = config().getString(CORS_REGEX);
     authServerDomain = config().getString(AUTHSERVER_DOMAIN);
+    
+    Schema.INSTANCE.setSchema("test");
 
     /* Set Connection Object */
     if (connectOptions == null) {
