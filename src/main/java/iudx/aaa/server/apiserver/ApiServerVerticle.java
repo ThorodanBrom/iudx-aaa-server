@@ -116,8 +116,6 @@ public class ApiServerVerticle extends AbstractVerticle {
     corsRegex = config().getString(CORS_REGEX);
     authServerDomain = config().getString(AUTHSERVER_DOMAIN);
     
-    Schema.INSTANCE.setSchema("test");
-
     /* Set Connection Object */
     if (connectOptions == null) {
       connectOptions = new PgConnectOptions().setPort(databasePort).setHost(databaseIP)

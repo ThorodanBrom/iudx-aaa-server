@@ -1,5 +1,7 @@
 package iudx.aaa.server.apiserver.util;
 
+import iudx.aaa.server.apiserver.Schema;
+
 public class Constants {
   // Header params
   public static final String HEADER_AUTHORIZATION = "Authorization";
@@ -129,7 +131,7 @@ public class Constants {
   public static final String INVALID_TOKEN_FAILED_COMPOSE = "INVALID_TOKEN";
 
   /* SQL Queries */
-  public static final String DB_SCHEMA = "test";
+  public static final Schema DB_SCHEMA = Schema.INSTANCE;
   public static final String SQL_GET_USER_ROLES =
       "SELECT u.id, uc.client_id, array_agg(r.role) as roles \n" + "FROM (select id from "
           + DB_SCHEMA + ".users where keycloak_id = $1) u \n" + "LEFT JOIN " + DB_SCHEMA

@@ -8,7 +8,7 @@ import iudx.aaa.server.apiserver.Schema;
 
 public class Constants {
 
-  public static final String DB_SCHEMA = Schema.INSTANCE.getSchema();
+  public static final Schema DB_SCHEMA = Schema.INSTANCE;
 
   public static final String COMPOSE_FAILURE = "COMPOSE_FAILURE";
   public static final String NIL_UUID = "00000000-0000-0000-0000-000000000000";
@@ -123,15 +123,15 @@ public class Constants {
       "SELECT role FROM " + DB_SCHEMA + ".roles WHERE user_id = $1::uuid";
 
   public static final String SQL_GET_CLIENTS_FORMATTED =
-      "SELECT client_name as \"clientName\", client_id as \"clientId\" " + " FROM " + DB_SCHEMA
-          + ".user_clients WHERE user_id = $1::uuid";
+      "SELECT client_name as \"clientName\", client_id as \"clientId\" " + " FROM "
+          + DB_SCHEMA + ".user_clients WHERE user_id = $1::uuid";
 
   public static final String SQL_UPDATE_ORG_ID = "UPDATE " + DB_SCHEMA
       + ".users SET organization_id = $1::uuid WHERE organization_id IS NULL AND id = $2::uuid";
 
-  public static final String SQL_GET_PHONE_JOIN_ORG =
-      "SELECT users.phone, name, url FROM " + DB_SCHEMA + ".organizations RIGHT JOIN " + DB_SCHEMA
-          + ".users" + " ON users.organization_id = organizations.id WHERE users.id = $1::uuid";
+  public static final String SQL_GET_PHONE_JOIN_ORG = "SELECT users.phone, name, url FROM "
+      + DB_SCHEMA + ".organizations RIGHT JOIN " + DB_SCHEMA + ".users"
+      + " ON users.organization_id = organizations.id WHERE users.id = $1::uuid";
 
   public static final String SQL_GET_KC_ID_FROM_ARR =
       "SELECT id, keycloak_id FROM " + DB_SCHEMA + ".users WHERE id = ANY($1::uuid[])";
@@ -141,8 +141,8 @@ public class Constants {
       + ".organizations ON users.organization_id = organizations.id WHERE keycloak_id = $1::uuid";
 
   public static final String SQL_GET_UID_ORG_ID_CHECK_ROLE =
-      "SELECT users.id, users.organization_id FROM " + DB_SCHEMA + ".users" + " JOIN " + DB_SCHEMA
-          + ".roles ON users.id = roles.user_id"
+      "SELECT users.id, users.organization_id FROM " + DB_SCHEMA + ".users" + " JOIN "
+          + DB_SCHEMA + ".roles ON users.id = roles.user_id"
           + " WHERE users.keycloak_id = $1::uuid AND roles.role = $2::" + DB_SCHEMA
           + ".role_enum AND roles.status = 'APPROVED'";
 }

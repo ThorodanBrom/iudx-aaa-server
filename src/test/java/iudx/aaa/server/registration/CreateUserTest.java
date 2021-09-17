@@ -107,8 +107,6 @@ public class CreateUserTest {
     databasePassword = dbConfig.getString("databasePassword");
     poolSize = Integer.parseInt(dbConfig.getString("poolSize"));
 
-    Schema.INSTANCE.setSchema("test");
-
     if (connectOptions == null) {
       connectOptions = new PgConnectOptions().setPort(databasePort).setHost(databaseIP)
           .setDatabase(databaseName).setUser(databaseUserName).setPassword(databasePassword);

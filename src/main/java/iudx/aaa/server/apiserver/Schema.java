@@ -1,26 +1,19 @@
 package iudx.aaa.server.apiserver;
 
-import java.util.concurrent.CountDownLatch;
 
 public enum Schema {
   INSTANCE;
 
   String schema;
-  CountDownLatch latch = new CountDownLatch(1);
 
-  public void setSchema(String schema) {
-    if (latch.getCount() > 0) {
+  public void set(String schema) {
+    if (this.schema == null) {
       this.schema = schema;
-      latch.countDown();
     }
   }
 
-  public String getSchema() {
-    try {
-      latch.await();
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+  @Override
+  public String toString() {
     return schema;
   }
 }
