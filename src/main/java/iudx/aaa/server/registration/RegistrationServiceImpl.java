@@ -87,6 +87,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -108,6 +109,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
   private PgPool pool;
   private KcAdmin kc;
+  private SecureRandom getRand = new SecureRandom();
 
   public RegistrationServiceImpl(PgPool pool, KcAdmin kc) {
     this.pool = pool;
@@ -314,6 +316,12 @@ public class RegistrationServiceImpl implements RegistrationService {
       handler.handle(Future.succeededFuture(r.toJson()));
       return this;
     }
+    
+    byte[] secretArray = new byte[20];
+    getRand.nextBytes(secretArray);
+    String clientSecret = Hex.encodeHexString(secretArray);
+    System.out.println(clientSecret);
+    System.out.println(DigestUtils.sha512Hex(clientSecret));
 
     /* If it's a search user flow */
     if (!searchUserDetails.isEmpty()) {

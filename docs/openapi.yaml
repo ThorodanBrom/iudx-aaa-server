@@ -146,10 +146,8 @@ paths:
           description: Keycloak Issued clientId
         - schema:
             type: string
-            format: uuid
-            maxLength: 36
-            pattern: '^[0-9a-f]{8}\b-[0-9a-f]{4}\b-[0-9a-f]{4}\b-[0-9a-f]{4}\b-[0-9a-f]{12}$'
-            minLength: 36
+            maxLength: 40
+            minLength: 40
           in: header
           description: Keycloak Issued clientSecret
           name: clientSecret
